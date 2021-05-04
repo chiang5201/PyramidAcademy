@@ -9,10 +9,13 @@ public class Main {
         boolean thinking=true;
         int guessCount;
         int num;
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        String userName;
         System.out.println("Hello! What is your name?");
-        String userName = myObj.nextLine();  // Read user input
-
+        try {
+             userName = new Scanner(System.in).nextLine();  // Read user input
+        } catch (Exception e )
+        {   System.out.println("!!error!!");
+            return; }
         while (thinking)
         {
             num=(int)(Math.random() * 10) + (int) (Math.random() * 10) +1;
@@ -20,7 +23,11 @@ public class Main {
             for(guessCount=0;guessCount<6;guessCount++)
             {
                 System.out.println("Take a guess.");
-                int inputNum=myObj.nextInt();
+                int inputNum;
+                try{ inputNum=new Scanner(System.in).nextInt();}
+                catch (Exception e )
+                {   System.out.println("!!error!!");
+                    return; }
                 if(inputNum==num)
                     break;
                 else if(inputNum<num)
@@ -33,7 +40,10 @@ public class Main {
             else
                 System.out.println("Good job "+userName+"! You guessed my number in " + guessCount + " guesses!");
             System.out.println("Would you like to play again? (y or n)");
-            String playing = new Scanner(System.in).nextLine(); // Read user input
+            String playing="";
+            try { playing = new Scanner(System.in).nextLine(); // Read user input
+            }  catch (Exception e){   System.out.println("!!error!!");
+            return; }
             if(playing.equals("n"))
                 thinking=false;
         }

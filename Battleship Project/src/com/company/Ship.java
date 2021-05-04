@@ -57,28 +57,27 @@ public class Ship extends MainBattleship{
 
     private boolean addShip(int x, int y, String axis, String type, int count)
     {   String error="";
-        if(x<0||y<0) return false;
-        else if(axis.equals("v")&& count+y<10)
-        {   for (int i = 0; i < count; i++)
-                if (shipMap[y + i][x] != "~")
-                {   error=at(shipMap[y+i][x]);
-                    System.out.println(error+" is already located there, enter another location: ");
-                    return false;
-                }
-            for (int i = 0; i < count; i++)
-                shipMap[y + i][x] = type;
-        }
-        else if(axis.equals("h")&& count+x<10)
-        {   for (int i = 0; i < count; i++)
-                if (shipMap[y][x + i] != "~")
-                {   error=at(shipMap[y][x+i]);
-                    System.out.println( error+" is already located there, enter another location: ");
-                    return false;
-                }
-            for (int i = 0; i < count; i++)
-                shipMap[y][x + i] =type;
-        }
-        else
+        try {
+            if (axis.equals("v") ) {
+                for (int i = 0; i < count; i++)
+                    if (shipMap[y + i][x] != "~") {
+                        error = at(shipMap[y + i][x]);
+                        System.out.println(error + " is already located there, enter another location: ");
+                        return false;
+                    }
+                for (int i = 0; i < count; i++)
+                    shipMap[y + i][x] = type;
+            } else if (axis.equals("h") ) {
+                for (int i = 0; i < count; i++)
+                    if (shipMap[y][x + i] != "~") {
+                        error = at(shipMap[y][x + i]);
+                        System.out.println(error + " is already located there, enter another location: ");
+                        return false;
+                    }
+                for (int i = 0; i < count; i++)
+                    shipMap[y][x + i] = type;
+            }
+        }catch (Exception e )
         {   System.out.println("!!out side of map!! ");
             return false;
         }
@@ -137,8 +136,10 @@ public class Ship extends MainBattleship{
             at = token(readIN);
             System.out.println("Place horizontally or vertically (h or v)?");
             axis = new Scanner(System.in).nextLine();
-            if (at.size() != 2) return false;
-            else if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "c", 2)) return false;
+            //if (at.size() != 2) return false;
+            try {
+                if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "c", 2)) return false;
+            }catch (Exception e ){System.out.println("Error on input index try again!!");return false;}
             this.cruiser = true;
             getShipMap();
         }
@@ -149,8 +150,8 @@ public class Ship extends MainBattleship{
             at = token(readIN);
             System.out.println("Place horizontally or vertically (h or v)?");
             axis = new Scanner(System.in).nextLine();
-            if (at.size() != 2) return false;
-            else if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "d", 3)) return false;
+            //if (at.size() != 2) return false;
+            if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "d", 3)) return false;
             getShipMap();
             this.destroyer=true;
         }
@@ -160,8 +161,8 @@ public class Ship extends MainBattleship{
             at = token(readIN);
             System.out.println("Place horizontally or vertically (h or v)?");
             axis = new Scanner(System.in).nextLine();
-            if (at.size() != 2) return false;
-            else if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "s", 3)) return false;
+            //if (at.size() != 2) return false;
+            if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "s", 3)) return false;
             this.submarine=true;
             getShipMap();
         }
@@ -171,8 +172,8 @@ public class Ship extends MainBattleship{
             at = token(readIN);
             System.out.println("Place horizontally or vertically (h or v)?");
             axis = new Scanner(System.in).nextLine();
-            if (at.size() != 2) return false;
-            else if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "b", 4)) return false;
+            //if (at.size() != 2) return false;
+            if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "b", 4)) return false;
             this.battleship=true;
             getShipMap();
         }
@@ -182,8 +183,8 @@ public class Ship extends MainBattleship{
             at = token(readIN);
             System.out.println("Place horizontally or vertically (h or v)?");
             axis = new Scanner(System.in).nextLine();
-            if (at.size() != 2) return false;
-            else if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "a", 5)) return false;
+            //if (at.size() != 2) return false;
+            if (!addShip(at.get(0) - 1, at.get(1) - 1, axis, "a", 5)) return false;
             this.aircraft=true;
             getShipMap();
         }

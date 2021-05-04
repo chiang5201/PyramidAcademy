@@ -15,23 +15,25 @@ public class Main {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int input = myObj.nextInt();  // Read user input
         System.out.println("");
-
-        if(input==1)
-        {  System.out.println("You approach the cave...");
-           System.out.println("It is dark and spooky...");
-           System.out.println("A large dragon jumps out in front of you! He opens his jaws and... ");
-           System.out.println("Gobbles you down in one bite!");
-           System.out.println("You die!!");
-        }
-        else if(input==2)
-        {
-            System.out.println("You approach the cave...");
-            System.out.println("It is dark and spooky...");
-            System.out.println("A large dragon jumps out in front of you! He ask you why are you here?");
-            System.out.println("you say you are look for treasure!!");
-            System.out.println("The dragon getting you all him treasure");
-        }
-        else
+        try
+        {   if(input==1)
+            {  System.out.println("You approach the cave...");
+               System.out.println("It is dark and spooky...");
+               System.out.println("A large dragon jumps out in front of you! He opens his jaws and... ");
+               System.out.println("Gobbles you down in one bite!");
+               System.out.println("You die!!");
+            }
+            else if(input==2)
+            {   System.out.println("You approach the cave...");
+                System.out.println("It is dark and spooky...");
+                System.out.println("A large dragon jumps out in front of you! He ask you why are you here?");
+                System.out.println("you say you are look for treasure!!");
+                System.out.println("The dragon getting you all him treasure");
+            }else
             System.out.println("~~ERROR~~");
+        }
+        catch (Exception e)
+        { return;
+        }
     }
 }

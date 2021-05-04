@@ -49,6 +49,7 @@ public class Main {
                                                 {"=","=","=","=" }
                                             } ;
         System.out.println("H A N G M A N");
+        try{
         while (playing)
         {  //---------initialize----------------------------
             boolean print=true;
@@ -100,11 +101,12 @@ public class Main {
                 System.out.println("Yes! The secret word is \""+ans+"\"! You have won!");
             System.out.println("Would you like to play again? (yes or no)");
             String readIn = new Scanner(System.in).nextLine(); // Read user input
-            if(readIn.equals("no")||playCount==word.length-1)
+            if(readIn.equals("no"))
                 playing=false;
             playCount++;
         }
-
+        }catch (Exception e){ System.out.println("out of word");
+            return;}
 
     }
 }

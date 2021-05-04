@@ -26,14 +26,12 @@ public class Main {
     }
     public static Boolean move(char[][] map,int At, char move,HashSet<Integer> hist, int AI)
     {
-        if(At>9) At=9;
-        else if(At<1) At=1;
         if(AI==1)
             while (hist.contains(At))
             {   At++;
                 if(At>9) At=1;
             }
-        else if(hist.contains(At))
+        else if(hist.contains(At)||At>9)
         {
             System.out.println("~~ERROR~~ Choose again.");
             return false;
@@ -82,7 +80,8 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         String readIn ="";
-               char[][] intmap= new char[][]{  {' ',' ',' '},
+        int userIN=0;
+               char[][] map= new char[][]{  {' ',' ',' '},
                                                 {' ',' ',' '},
                                                 {' ',' ',' '},
                                             };
@@ -96,7 +95,8 @@ public class Main {
 			int step=0;
             HashSet <Integer> hist=new HashSet<>();
             System.out.println("Do you want to be X or O?");
-            readIn = new Scanner(System.in).nextLine(); // Read user input
+            try{readIn = new Scanner(System.in).nextLine(); }// Read user input
+            catch (Exception e){System.out.println("cant read you input"); return;}
             if(readIn.equals("X")||readIn.equals("x"))
             {   user='X';
                 ai='O';
@@ -109,7 +109,7 @@ public class Main {
             while (1==1)
             {
                 int computer=(int)(Math.random() * 10)+1;
-                move(map,computer,ai,hist,1);
+                move(map,computer%9,ai,hist,1);
                 step++;
                 Drawing(map);
                 if (step==5)
@@ -122,9 +122,10 @@ public class Main {
                 }
                 while (1==1)
                 {   System.out.println("What is your next move? (1-9)");
-                    int userIN = new Scanner(System.in).nextInt(); // Read user input
-                    if( move(map, userIN, user, hist, 0))
-                        break;
+                    try {
+                        userIN = new Scanner(System.in).nextInt(); // Read user input
+                        if( move(map, userIN, user, hist, 0)) break;
+                    }catch (Exception e){System.out.println("Out side of rang"); return;}
                 }
                 if (Wins(map, user))
                 {   Drawing(map);

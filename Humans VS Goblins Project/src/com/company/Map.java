@@ -4,7 +4,6 @@ import java.util.Scanner;  // Import the Scanner class
 public class Map {
     private Humans player1;
     private Goblins player2;
-    private int genX,genY;
 
     char[][]map=new char[4][4];
 
@@ -26,8 +25,13 @@ public class Map {
     public void draw()
     {
         resetMap();
-        map[player2.getY()][player2.getX()]='G';  //ai
-        map[player1.getY()][player1.getX()]='H'; //player
+        try {
+            map[player2.getY()][player2.getX()]='G';  //ai
+            map[player1.getY()][player1.getX()]='H'; //player
+        }
+        catch (Exception e)
+        {  System.out.println("~~Out~Of~Index~~");
+            return;}
         System.out.println(map[0][0]+"|"+map[0][1]+"|"+map[0][2]+"|"+map[0][3]);
         System.out.println("-+-+-+-");
         System.out.println(map[1][0]+"|"+map[1][1]+"|"+map[1][2]+"|"+map[1][3]);
@@ -39,16 +43,18 @@ public class Map {
     public boolean HumanMove()
     {   System.out.println("what is your next move Human");
         String readIn = new Scanner(System.in).nextLine(); // Read user input
-        if(      (readIn.equals("W")||readIn.equals("w")) && player1.getY()-1>-1)
-            player1.setY(player1.getY()-1);
-        else if( (readIn.equals("S")||readIn.equals("s")) && player1.getY()+1<4)
-            player1.setY(player1.getY()+1);
-        else if( (readIn.equals("A")||readIn.equals("a")) && player1.getX()-1>-1)
-            player1.setX(player1.getX()-1);
-        else if( (readIn.equals("D")||readIn.equals("d")) && player1.getX()+1<4)
-            player1.setX(player1.getX()+1);
-        else
-        {   System.out.println("~~~ERROR~TRY~AGAIN~~~");
+        try {
+            if ((readIn.equals("W") || readIn.equals("w"))  ) //&& player1.getY() - 1 > -1)
+                player1.setY(player1.getY() - 1);
+            else if ((readIn.equals("S") || readIn.equals("s")) )//&& player1.getY() + 1 < 4)
+                player1.setY(player1.getY() + 1);
+            else if ((readIn.equals("A") || readIn.equals("a")) )//&& player1.getX() - 1 > -1)
+                player1.setX(player1.getX() - 1);
+            else if ((readIn.equals("D") || readIn.equals("d")) )//&& player1.getX() + 1 < 4)
+                player1.setX(player1.getX() + 1);
+        }
+        catch (Exception e)
+        {   System.out.println("~~~ERROR~IN~HUMAN~MOVE~~~");
             return false;
         }
         return true;
