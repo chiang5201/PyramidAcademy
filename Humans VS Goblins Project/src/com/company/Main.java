@@ -1,6 +1,8 @@
 package com.company;
 import com.company.Map;
 
+import java.util.Scanner;
+
 
 public class Main {
 
@@ -16,7 +18,9 @@ public class Main {
             System.out.println("pleases use s for down");
             System.out.println("pleases use a for right");
             System.out.println("pleases use d for left");
-            while (!world.HumanMove()){}
+            System.out.println("what is your next move Human");
+            while (!world.HumanMove(new Scanner(System.in).nextLine()))
+                System.out.println("what is your next move Human!!!");
             world.GoblinMove();
             if(!world.collide()) break;
             world.draw();

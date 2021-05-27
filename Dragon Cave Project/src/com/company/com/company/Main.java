@@ -4,6 +4,8 @@ import javax.rmi.ssl.SslRMIClientSocketFactory;
 
 public class Main {
 
+
+
     public static void main(String[] args) {
 	// write your code here
         System.out.println("You are in a land full of dragons. In front of you,");

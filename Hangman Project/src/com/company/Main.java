@@ -1,4 +1,4 @@
-package com.company;
+package company;
 import java.util.Scanner;  // Import the Scanner class
 import java.util.*;
 public class Main {

@@ -1,4 +1,4 @@
-package com.company;
+package company;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +22,8 @@ public class Main {
         return litter;
     }
 
-    public static void encrypt()
+    public static void encrypt(String readIn, int input)
     {
-        System.out.println("Enter your message:");
-        String readIn=new Scanner(System.in).nextLine();
-        System.out.println("Enter the key number (1-52)");
-        int input=new Scanner(System.in).nextInt();
         String save="";
         for(int i=0; i<readIn.length(); i++)
         {   save=save+shift(readIn.charAt(i),input);
@@ -37,6 +33,7 @@ public class Main {
                 File out = new File("output.txt");
                 out.createNewFile();
                 Files.writeString(Path.of("output.txt"),save);
+                return;
             }
         catch (Exception e){e.printStackTrace();}
     }
@@ -58,13 +55,19 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 	// write your code here
+
         while (1==1) {
             System.out.println("Do you wish to encrypt or decrypt a message?");
             String readIn = new Scanner(System.in).nextLine();
             if (readIn.equals("decrypt"))
                 decrypt();
             else if(readIn.equals("encrypt"))
-                encrypt();
+            {   System.out.println("Enter your message:");
+                String read=new Scanner(System.in).nextLine();
+                System.out.println("Enter the key number (1-52)");
+                int input=new Scanner(System.in).nextInt();
+                encrypt(read, input);
+            }
         }
     }
 }
